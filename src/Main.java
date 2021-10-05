@@ -1,5 +1,9 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Realization realization = new Realization("6+4");
+        Scanner in = new Scanner(System.in);
+        String inputString = in.nextLine();
+        Realization realization = new Realization(inputString);
     }
 }

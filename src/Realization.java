@@ -29,7 +29,7 @@ public class Realization {
         stackCharacter.push(character);
     }
 
-    // add
+    // what operation do
     public void calcModule(char charUp, double leftValue, double rightValue){
         switch (charUp){
             case '*':
@@ -48,20 +48,7 @@ public class Realization {
 
     }
 
-    public String buildEnterStr(String enterStr){
-        StringBuilder sb = new StringBuilder();
-        sb.append(enterStr);
-        sb.append('=');
-        int i = 0;
-        while(sb.charAt(i) != '='){
-            if(sb.charAt(i) == '-'){
-                sb.replace(i, i+1, "+0-");
-            }
-            i++;
-        }
-        sb.deleteCharAt(i);
-        return sb.toString();
-    }
+    // calculation into brackets
     public void calcWithBrackets(){
         char getUp;
         double leftValue; // leftValue (operation) rightValue
@@ -75,6 +62,7 @@ public class Realization {
 
     }
 
+    // reset and calculation of part stack
     public void calcStack(){
         char getUp;
         double leftValue; // leftValue (operation) rightValue
@@ -87,8 +75,9 @@ public class Realization {
         }
     }
 
+    // general calculation
     public Double calculation(String enterStr){
-
+        // 3 set
         HashSet<Character> setOperation = new HashSet<>();
         HashSet<Character> setFirstPriority = new HashSet<>();
         HashSet<Character> setSecondPriority = new HashSet<>();
@@ -109,20 +98,27 @@ public class Realization {
             return 0.0;
         }
 
-        char prevChar = '0';
-        int  prevNum = 0;
-        int openBrackets = 0;
+        char prevChar = '0'; // previous operation
+        int  prevNum = 0; // starting position of number
+        int openBrackets = 0; // number brackets
         int i = 0;
+
+        // start reading a line
         while(i < enterStr.length()){
-            if(setOperation.contains(enterStr.charAt(i))){ // if symbol contains in own set
+            // If current symbol is operation
+            if(setOperation.contains(enterStr.charAt(i))){
                 if(enterStr.charAt(i) == '('){
                     openBrackets++;
                 } else if(enterStr.charAt(i) != '(') {
+                    // stack logical: value1 - value2 (operation) value3 != value1 + (-value2) (operation) value3
                     if (prevChar == '-') {
                         setUpperNumber(0 - Double.parseDouble(enterStr.substring(prevNum, i)));
                         getUpperCharacter();
                         setUpperCharacter('+');
-                    } else if (setFirstPriority.contains(enterStr.charAt(i)) & (setSecondPriority.contains(prevChar))) {
+
+                    }
+                    // priority calculation
+                    else if (setFirstPriority.contains(enterStr.charAt(i)) & (setSecondPriority.contains(prevChar))) {
                         if(i != prevNum){
                             setUpperNumber(Double.parseDouble(enterStr.substring(prevNum, i)));
                         }
@@ -137,6 +133,7 @@ public class Realization {
                         }
                     }
                 }
+                // work with close bracket
                 if(enterStr.charAt(i) == ')'){
                     calcWithBrackets();
                     getUpperCharacter();
@@ -148,7 +145,7 @@ public class Realization {
                     openBrackets--;
                     prevNum = i+1;
 
-                } else {
+                } else { // add operation in stack
                     setUpperCharacter(enterStr.charAt(i));
                     prevNum = i+1;
                     prevChar = enterStr.charAt(i);
