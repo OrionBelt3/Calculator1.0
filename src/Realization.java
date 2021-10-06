@@ -6,9 +6,6 @@ public class Realization {
 
     Realization(){}
 
-    Realization(String enterStr){
-        System.out.println(calculation( enterStr));
-    }
 
     // stack of number
     private Stack<Double> stackNumbers = new Stack<>();
@@ -107,6 +104,10 @@ public class Realization {
         while(i < enterStr.length()){
             // If current symbol is operation
             if(setOperation.contains(enterStr.charAt(i))){
+                // (-value)
+                if(enterStr.charAt(i) == '-'  & prevNum == i && stackCharacter.peek() == '('){
+                    setUpperNumber(0.0);
+                }
                 if(enterStr.charAt(i) == '('){
                     openBrackets++;
                 } else if(enterStr.charAt(i) != '(') {
