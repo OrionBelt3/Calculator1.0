@@ -30,7 +30,6 @@ public class CalculatorWindow {
 
     JFrame frame = new JFrame("CALCULATOR");
     String prevChar= new String();
-    HashSet<String> setDigital = new HashSet<>();
 
     private JFrame createJFrame(){
         HashSet<String> setDigital = new HashSet<>();
