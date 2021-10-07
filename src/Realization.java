@@ -1,11 +1,17 @@
+/*
+ * Calculator1.0 2021.10.7
+ * Realisation was built with use a stack
+ * Ivanov F.A
+ * IFA-ON
+ * GitHub: https://github.com/OrionBelt3
+ */
+
 import java.util.HashSet;
 import java.util.Stack;
-
 
 public class Realization {
 
     Realization(){}
-
 
     // stack of number
     private Stack<Double> stackNumbers = new Stack<>();

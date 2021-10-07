@@ -1,11 +1,21 @@
+/*
+ * Calculator1.0 2021.10.7
+ * Realisation was built with use a stack
+ * Ivanov F.A
+ * IFA-ON
+ * GitHub: https://github.com/OrionBelt3
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 
 public class CalculatorWindow {
     Realization realization = new Realization();
     String WARRING_MESSAGE_EMPTY = "Won't entered any symbols!\n";
+    String WARRING_MESSAGE_IMPOSSIBLE = "Is impossible to put this symbol!\n";
     int sizeButtonWeight = 60;
     int sizeButtonHeight = 60;
     int sizeBetweenButtons = 40;
@@ -19,15 +29,27 @@ public class CalculatorWindow {
     Font font2 = new Font("Bitstream Charter", Font.BOLD, 14);
 
     JFrame frame = new JFrame("CALCULATOR");
+    String prevChar= new String();
+    HashSet<String> setDigital = new HashSet<>();
 
     private JFrame createJFrame(){
+        HashSet<String> setDigital = new HashSet<>();
+        setDigital.add("1");
+        setDigital.add("2");
+        setDigital.add("3");
+        setDigital.add("4");
+        setDigital.add("5");
+        setDigital.add("6");
+        setDigital.add("7");
+        setDigital.add("8");
+        setDigital.add("9");
+        setDigital.add("0");
+
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
         frame.setBounds(dimension.width/2-400, dimension.height/2-250, 800, 500);
-
-        String prevChar= "";
 
         panelRight.setLayout(null);
 
@@ -86,109 +108,155 @@ public class CalculatorWindow {
         buttonDivision.setSize(sizeButtonWeight, sizeButtonHeight);
         buttonDivision.setLocation(pointXPanelRight+sizeButtonWeight+280+2*sizeBetweenButtons, pointYPanelRight+sizeTextFieldHeight+6*heightTopPadding+4*sizeButtonHeight);
 
-        historyDisplay.setBounds(10,10, 280, 500);
+        historyDisplay.setBounds(10,40, 280, 460);
+        historyDisplay.setLineWrap(true);
+
 
         button0.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         button5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         button6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         button7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         button8.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         button9.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                prevChar = ((JButton)e.getSource()).getText();
             }
         });
         buttonPlus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                display.setText(display.getText() + ((JButton)e.getSource()).getText());
-                //prevChar = ((JButton)e.getSource()).getText();
+                if (setDigital.contains(prevChar) || prevChar.equals(")")) {
+                    display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                    prevChar = ((JButton)e.getSource()).getText();
+                } else {
+                    historyDisplay.setText(historyDisplay.getText() + WARRING_MESSAGE_IMPOSSIBLE);
+                }
             }
         });
         buttonMinus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                if (setDigital.contains(prevChar) || prevChar.equals(")") || prevChar.equals("(") ) {
+                    display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                    prevChar = ((JButton)e.getSource()).getText();
+                } else {
+                    historyDisplay.setText(historyDisplay.getText() + WARRING_MESSAGE_IMPOSSIBLE);
+                }
             }
         });
         buttonMultiplication.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                if (setDigital.contains(prevChar) || prevChar.equals(")")) {
+                    display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                    prevChar = ((JButton)e.getSource()).getText();
+                } else {
+                    historyDisplay.setText(historyDisplay.getText() + WARRING_MESSAGE_IMPOSSIBLE);
+                }
             }
         });
         buttonDivision.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                if (setDigital.contains(prevChar) || prevChar.equals(")")) {
+                    display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                    prevChar = ((JButton)e.getSource()).getText();
+                } else {
+                    historyDisplay.setText(historyDisplay.getText() + WARRING_MESSAGE_IMPOSSIBLE);
+                }
             }
         });
         buttonPoint.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                if (setDigital.contains(prevChar)) {
+                    display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                    prevChar = ((JButton)e.getSource()).getText();
+                } else {
+                    historyDisplay.setText(historyDisplay.getText() + WARRING_MESSAGE_IMPOSSIBLE);
+                }
             }
         });
         buttonOpenBracket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                if (!(setDigital.contains(prevChar)) & !prevChar.equals(".")) {
+                    display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                    prevChar = ((JButton)e.getSource()).getText();
+                } else {
+                    historyDisplay.setText(historyDisplay.getText() + WARRING_MESSAGE_IMPOSSIBLE);
+                }
             }
         });
         buttonCloseBracket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                if ((setDigital.contains(prevChar) || prevChar.equals(")")) & !prevChar.equals(".")) {
+                    display.setText(display.getText() + ((JButton)e.getSource()).getText());
+                    prevChar = ((JButton)e.getSource()).getText();
+                } else {
+                    historyDisplay.setText(historyDisplay.getText() + WARRING_MESSAGE_IMPOSSIBLE);
+                }
             }
         });
 
@@ -196,9 +264,10 @@ public class CalculatorWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 StringBuilder str = new StringBuilder(display.getText());
-                if(str.length() != 0) {
+                try{
                     display.setText(str.deleteCharAt(str.length()-1).toString());
-                } else {
+                    prevChar = Character.toString(str.charAt(str.length()-1));
+                } catch (Exception exception){
                     historyDisplay.setText(historyDisplay.getText() + WARRING_MESSAGE_EMPTY);
                 }
 
@@ -215,17 +284,23 @@ public class CalculatorWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 display.setText(null);
-                historyDisplay.setText(null);
+                historyDisplay.setText("REPORT\n");
             }
         });
 
         buttonEqual.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
+                    String result = (realization.calculation(display.getText()).toString());
+                    historyDisplay.setText(historyDisplay.getText() + display.getText() + "=" + result + "\n");
+                    display.setText(result);
+                } catch(Exception ex){
+                    String result = ex.getMessage();
+                    historyDisplay.setText(historyDisplay.getText() + result + "\n");
+                }
 
-                String result = (realization.calculation(display.getText()).toString());
-                historyDisplay.setText(historyDisplay.getText() + display.getText() + "=" + result + "\n");
-                display.setText(result);
+
             }
         });
 
@@ -273,9 +348,6 @@ public class CalculatorWindow {
         buttonOpenBracket.setBackground(Color.lightGray);
         buttonEqual.setBackground(Color.lightGray);
 
-
-
-
         panelRight.add(display);
         panelRight.add(buttonCF);
         panelRight.add(buttonEqual);
@@ -306,9 +378,7 @@ public class CalculatorWindow {
 
         historyDisplay.setBackground(Color.black);
         historyDisplay.setForeground(Color.GREEN);
-        historyDisplay.setFont(font);
-
-
+        historyDisplay.setFont(font2);
 
         frame.add(panelLeft);
         frame.add(panelRight);
@@ -318,7 +388,7 @@ public class CalculatorWindow {
     JPanel panelLeft = new JPanel();
     JPanel panelRight = new JPanel();
     JTextField display = new JTextField();
-    JTextArea historyDisplay = new JTextArea();
+    JTextArea historyDisplay = new JTextArea("REPORT\n");
     JButton button0 = new JButton("0");
     JButton button1 = new JButton("1");
     JButton button2 = new JButton("2");
